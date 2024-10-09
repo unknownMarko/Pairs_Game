@@ -12,7 +12,7 @@ Simple Pairs game in browser coded in python. Can be played by two players on th
 ## Adding dependencies
 
  - `pip install -r requirements.txt`
- - 
+
 ## Run
 
  - `python.exe .\home_page.py`
