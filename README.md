@@ -1,2 +1,21 @@
-# Pairs
-Python Project of Pairs in browser.
+# Marko's Pairs
+
+Simple Pairs game in browser coded in python. Can be played by two players on the same computer.
+
+## Setup venv
+
+ - `pip install virtualenv`
+ - `python -m venv venv`
+ - `venv\Scripts\activate`
+
+## Run
+
+ - `python.exe .\home_page.py`
+
+## Deactivate venv
+
+ - `deactivate`
+ - 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
