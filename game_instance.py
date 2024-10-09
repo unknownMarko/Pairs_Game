@@ -24,6 +24,11 @@ from nicegui import ui
 import asyncio
 import random as rnd
 
+
+def color_card(e, color):
+    e.sender.props('color=' + color)
+
+
 class PairsGame:
     def __init__(self):
         self.buttons = []
@@ -36,9 +41,6 @@ class PairsGame:
         self.player1_score = ui.label()
         self.player2_score = ui.label()
         self.testing = False
-
-    def color_card(self, e, color):
-        e.sender.props('color=' + color)
 
     def create_board(self):
         emojis = [
@@ -65,32 +67,32 @@ class PairsGame:
         if self.board[self.uncovered_cards[0][1]] == self.board[self.uncovered_cards[1][1]]:  # noqa: E501
             ui.notify("✅✅✅")
             if self.player_current == 0:
-                if self.testing == False:
-                    self.color_card(self.uncovered_cards[0][0], 'red')
-                    self.color_card(self.uncovered_cards[1][0], 'red')
+                if not self.testing:
+                    color_card(self.uncovered_cards[0][0], 'red')
+                    color_card(self.uncovered_cards[1][0], 'red')
                 self.player1_cards.append(self.uncovered_cards[0][0])
                 self.player1_cards.append(self.uncovered_cards[1][0])
             else:
-                if self.testing == False:
-                    self.color_card(self.uncovered_cards[0][0], 'green')
-                    self.color_card(self.uncovered_cards[1][0], 'green')
+                if not self.testing:
+                    color_card(self.uncovered_cards[0][0], 'green')
+                    color_card(self.uncovered_cards[1][0], 'green')
                 self.player2_cards.append(self.uncovered_cards[0][0])
                 self.player2_cards.append(self.uncovered_cards[1][0])
         else:
             ui.notify("❌❌❌")
-            if self.testing == False:
+            if not self.testing:
                 self.uncovered_cards[0][0].sender.set_text(' ')
                 self.uncovered_cards[1][0].sender.set_text(' ')
-                self.color_card(self.uncovered_cards[0][0], 'grey-9')
-                self.color_card(self.uncovered_cards[1][0], 'grey-9')
+                color_card(self.uncovered_cards[0][0], 'grey-9')
+                color_card(self.uncovered_cards[1][0], 'grey-9')
             if self.player_current == 0:
                 self.player_current = 1
-                if self.testing == False:
+                if not self.testing:
                     self.player1_score.style('font-weight: normal')
                     self.player2_score.style('font-weight: 550;')
             else:
                 self.player_current = 0
-                if self.testing == False:
+                if not self.testing:
                     self.player2_score.style('font-weight: normal;')
                     self.player1_score.style('font-weight: 550;')
 
@@ -110,13 +112,13 @@ class PairsGame:
     async def press_button(self, e, i):
         self.uncovered_cards.append([e, i])
 
-        if self.testing == False:
+        if not self.testing:
             e.sender.set_text(self.board[i])
-            self.color_card(e, 'white')
+            color_card(e, 'white')
             e.sender.disable()
 
         if len(self.uncovered_cards) == 2:
-            if self.testing == False:
+            if not self.testing:
                 for btn in self.buttons:
                     btn.disable()
                 await asyncio.sleep(2)
