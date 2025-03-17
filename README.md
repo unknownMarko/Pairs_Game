@@ -1,7 +1,7 @@
-# Marko's Pairs
+# Marko's Pairs Game
 ![](https://github.com/unknownMarko/Pairs/blob/main/screenshots/screenshot.png)
 
-Simple Pairs game in browser coded in python. Can be played by two players on the same computer.
+Simple Pairs game in browser coded in Python. Can be played by two players on the same computer.
 
 ## Setup venv
 
